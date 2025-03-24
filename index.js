@@ -3,29 +3,27 @@ const errorText = document.getElementById("errortext")
 
 var showError = false
 
-function ConnectLoop() {
-  var cancelFlag = false
-  while (cancelFlag === false) {
-    fetch(ep)
+async function ConnectLoop() {
+  try {
+    await fetch(ep)
       .then(response => response.json())
       .then(data => {
-      })
-      .catch(error => {
-        if (error) {
-          cancelFlag = true
-        }
-    );
+        showError = false;
+      });
+  } catch (error) {
+    showError = true;
   }
-  showError = true
 }
 
-function ShowErrorMessage() {
-  errorText.style.visibility = "visible"
+async function ShowErrorMessage() {
+  errorText.style.visibility = "visible";
 }
 
-ConnectLoop()
-while (!showError) {
-  
+async function main() {
+  await ConnectLoop();
+  if (showError) {
+    ShowErrorMessage();
+  }
 }
 
-ShowErrorMessage()
+main();
