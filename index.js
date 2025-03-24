@@ -1,4 +1,4 @@
-const ep = "http://167.58.46.201:8080"
+const ep = "https://167.58.46.201:8080"
 const errorText = document.getElementById("errortext")
 
 var showError = false
